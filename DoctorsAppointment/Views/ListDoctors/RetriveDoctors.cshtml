@@ -1,0 +1,16 @@
+﻿<h1>@Model.msg1</h1>
+<h2>@Model.msg2</h2>
+<h3>
+	Value:
+	@if (Model.value >= 150)
+	{
+		<p>Greater Than or equal 150</p>
+		<p>@Model.value</p>
+	}
+	else
+	{
+		<p>Less Than 150</p>
+		<p>@Model.value</p>
+	}
+
+</h3>
