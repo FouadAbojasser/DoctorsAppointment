@@ -1,17 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DoctorsAppointment.Data;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace DoctorsAppointment.Controllers
 {
+    
     public class ListDoctorsController : Controller
     {
+        private readonly ApplicationDbContext _context = new();
         public IActionResult RetriveDoctors()
         {
-            string msg1 = "List Doctors Page";
-            string msg2 = "Welcome to this Page";
-            int value = 150;
-
-            var msgs = new {msg1, msg2, value};
-            return View(model: msgs);
+            var doctors = _context.Doctors;
+            return View(doctors.ToList());
         }
     }
 }
