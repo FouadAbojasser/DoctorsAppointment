@@ -1,0 +1,134 @@
+﻿@model IEnumerable<Doctor>
+
+<body>
+    <!-- Doctor Search Section Start -->
+    <div class="container style-one pt-120 pb-90">
+        <div class="text-center">
+            <h6 class="section-subtitle fw-medium font-primary d-inline-block text_secondary position-relative mb-15" data-aos="fade-up" data-aos-duration="1100" data-aos-delay="200">OUR DOCTORS</h6>
+            <h2 class="section-title fw-black text-title text-center mb-35" data-aos="fade-up" data-aos-duration="1100" data-aos-delay="300">Meet The specialist Team</h2>
+        </div>
+        <ul class="nav nav-tabs doctor-tablist d-flex justify-content-center border-0 mb-35" role="tablist">
+            <li class="nav-item">
+                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab_1" type="button" role="tab">All</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab_2" type="button" role="tab">Neurosurgery</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab_3" type="button" role="tab">Dentristy</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab_4" type="button" role="tab">Pediatrics</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab_5" type="button" role="tab">Cheif Surgeon</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab_6" type="button" role="tab">Cardiologist</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab_7" type="button" role="tab">Dermatologist</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab_8" type="button" role="tab">Neurologist</button>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade show active transition" id="tab_1" role="tabpanel">
+                <div class="row justify-content-center">
+
+                    @foreach(var doctor in Model) 
+                    {
+                        <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6">
+                            <div class="doctor-card style-three mb-30 round-20">
+                                <div class="doctor-img position-relative round-10 mb-32">
+                                    <img src="~/img/doctors/@(doctor.Img)" alt="Image" class="round-10">
+                                    <ul class="social-profile list-unstyled mb-0 position-absolute transition">
+                                        <li><a href="https://www.facebook.com/" target="_blank" class="d-flex flex-column align-items-center justify-content-center round-5 transition"><i class="ri-facebook-fill"></i></a></li>
+                                        <li><a href="https://x.com/?lang=en" target="_blank" class="d-flex flex-column align-items-center justify-content-center round-5 transition"><i class="ri-twitter-x-line"></i></a></li>
+                                        <li><a href="https://www.instagram.com/" target="_blank" class="d-flex flex-column align-items-center justify-content-center round-5 transition"><i class="ri-instagram-fill"></i></a></li>
+                                        <li><a href="https://www.linkedin.com/" target="_blank" class="d-flex flex-column align-items-center justify-content-center round-5 transition"><i class="ri-linkedin-fill"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="doctor-info text-center">
+                                    <h3 class="fs-24 fw-extrabold mb-13"><a href="/Doctors/DoctorDetails" class="text-title hover-text-primary">@doctor.Name</a></h3>
+                                    <span>@doctor.Specialization</span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    <!-- Doctor Search Section End -->
+
+    <!-- Simple Section Start -->
+    <div class="bg-ash promo-area pt-120 pb-90 round-20">
+        <div class="container style-one">
+            <div class="row justify-content-center">
+                <div class="col-xl-4 col-md-6">
+                    <div class="promo-card d-flex flex-wrap mb-30">
+                        <div class="promo-icon bg-chard d-flex flex-column align-items-center justify-content-center rounded-circle"><img src="~/img/icons/mission.svg" alt="Icon"></div>
+                        <div class="promo-info">
+                            <h3 class="fs-24 text-title fw-extrabold">Our Mission</h3>
+                            <p class="mb-0">Our medical center is dedicated with commitment to excellence we broad from preventive care routine checkups</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6 ps-xxl-5">
+                    <div class="promo-card d-flex flex-wrap mb-30">
+                        <div class="promo-icon bg-berylGreen d-flex flex-column align-items-center justify-content-center rounded-circle"><img src="~/img/icons/focus.svg" alt="Icon"></div>
+                        <div class="promo-info">
+                            <h3 class="fs-24 text-title fw-extrabold">Our Mission</h3>
+                            <p class="mb-0">Our medical center is dedicated with commitment to excellence we broad from preventive care routine checkups</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6 ps-xxl-5">
+                    <div class="promo-card d-flex flex-wrap mb-30">
+                        <div class="promo-icon bg-mauve d-flex flex-column align-items-center justify-content-center rounded-circle"><img src="~/img/icons/value.svg" alt="Icon"></div>
+                        <div class="promo-info">
+                            <h3 class="fs-24 text-title fw-extrabold">Our Mission</h3>
+                            <p class="mb-0">Our medical center is dedicated with commitment to excellence we broad from preventive care routine checkups</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Simple Section End -->
+
+    <!-- Why Choose Us Section Start -->
+    <div class="wh-area style-four ptb-120">
+        <div class="container style-one">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="wh-content mb-lg-30">
+                        <h6 class="section-subtitle fw-medium font-primary d-inline-block text_secondary position-relative mb-15" data-aos="fade-up" data-aos-duration="1100" data-aos-delay="200">YOUR HEALTH IS OUR TOP GOAL</h6>
+                        <h2 class="section-title fw-black text-title mb-15 me-xxl-5" data-aos="fade-up" data-aos-duration="1100" data-aos-delay="300">Professional Medical Network With Large Directory Listings</h2>
+                        <p class="fs-xx-14 mb-38" data-aos="fade-up" data-aos-duration="1100" data-aos-delay="400">With a focus on compassionate and personalized treatment we strive to create a welcoming environment where patients feel valued respected and well informed about their health</p>
+                        <ul class="feature-item-list list-unstyled" data-aos="fade-up" data-aos-duration="1100" data-aos-delay="500">
+                            <li class="position-relative text-title font-secondary fw-semibold round-10"><img src="~/img/icons/check.svg" alt="Check icon">We Accept Many Insurance Plans And Offer Discounts</li>
+                            <li class="position-relative bg-white text-title font-secondary fw-semibold round-10"><img src="~/img/icons/check.svg" alt="Check icon">Friendly Team You Can Call Friends</li>
+                            <li class="position-relative bg-white text-title font-secondary fw-semibold round-10"><img src="~/img/icons/check.svg" alt="Check icon">We Use Energy-saving And Waste-reducing Methods</li>
+                        </ul>
+                        <a href="about.html" class="btn style-two font-secondary fw-semibold position-relative z-1 round-10">
+                            <span>
+                                View Open Positions
+                                <img src="~/img/icons/right-arrow-white.svg" alt="Icon" class="transition icon-left">
+                            </span>
+                            <img src="~/img/icons/right-arrow-white.svg" alt="Icon" class="transition icon-right">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 ps-xxl-4">
+                    <div class="wh-img-wrap bg-f position-relative round-20" data-aos="fade-up" data-aos-duration="1100" data-aos-delay="200">
+                        <div class="wh-img-one bg-white position-absolute round-20"><img src="~/img/why-choose-us/wh-img-3.jpg" alt="Image" class="round-20"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Why Choose Us Section End -->
+    
+</body>

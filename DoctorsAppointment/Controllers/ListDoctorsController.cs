@@ -5,13 +5,18 @@ using Microsoft.EntityFrameworkCore;
 namespace DoctorsAppointment.Controllers
 {
     
-    public class ListDoctorsController : Controller
+    public class DoctorsController : Controller
     {
         private readonly ApplicationDbContext _context = new();
-        public IActionResult RetriveDoctors()
+        public IActionResult ListDoctors()
         {
             var doctors = _context.Doctors;
             return View(doctors.ToList());
+        }
+
+        public IActionResult DoctorDetails()
+        {
+            return View();
         }
     }
 }
