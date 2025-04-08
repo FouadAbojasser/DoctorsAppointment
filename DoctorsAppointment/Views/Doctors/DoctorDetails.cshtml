@@ -1,4 +1,5 @@
-﻿<!-- Doctor Details Section Start -->
+﻿@model Doctor
+<!-- Doctor Details Section Start -->
 <div class="container style-one ptb-120">
     <div class="row">
         <div class="col-xl-4 pe-xxl-5">
@@ -6,20 +7,20 @@
                 <div class="sidebar-widget style-three single-doctor-widget round-20">
                     <div class="doctor-card style-four round-20">
                         <div class="doctor-img position-relative  mb-32">
-                            <img src="~/img/doctors/doctor-1.jpg" alt="Image" class="w-100">
+                            <img src="~/img/doctors/@Model.Img" alt="Image" class="w-100">
                         </div>
                         <div class="doctor-info">
-                            <h3 class="fs-24 fw-extrabold mb-6"><a href="doctor-details.html" class="text-title hover-text-primary">Dr. Demetrius Wright</a></h3>
-                            <span>Family Medicine</span>
+                            <h3 class="fs-24 fw-extrabold mb-6"><a href="/Doctors/DoctorDetails/@Model.Id" class="text-title hover-text-primary">@Model.Name</a></h3>
+                            <span>@Model.DoctorType</span>
                         </div>
                     </div>
                 </div>
                 <div class="sidebar-widget single-doctor-info-widget round-20">
                     <h3 class="sidebar-widget-title fs-24 fw-extrabold text-title mb-18">Personal Information</h3>
                     <ul class="contact-info list-unstyled">
-                        <li class="position-relative"><img src="~/img/icons/phone-black-4.svg" alt="Icon"><a href="tel:968547856254" class="text-para hover-text-primary">+968 547856 254</a></li>
-                        <li class="position-relative"><img src="~/img/icons/mail-black-4.svg" alt="Icon"><a href="mailto:contact@demetrius.com" class="text-para hover-text-primary">contact@demetrius.com</a></li>
-                        <li class="position-relative"><img src="~/img/icons/pin-black-4.svg" alt="Icon">Ribon Building, Walse street, Canada</li>
+                        <li class="position-relative"><img src="~/img/icons/phone-black-4.svg" alt="Icon"><a href="tel:968547856254" class="text-para hover-text-primary">@Model.PhoneNumber</a></li>
+                        <li class="position-relative"><img src="~/img/icons/mail-black-4.svg" alt="Icon"><a href="@Model.Email" class="text-para hover-text-primary">@Model.Email</a></li>
+                        <li class="position-relative"><img src="~/img/icons/pin-black-4.svg" alt="Icon">@Model.Address</li>
                     </ul>
                     <ul class="social-profile style-three list-unstyled mb-0">
                         <li><a href="https://www.facebook.com/" target="_blank" class="d-flex flex-column align-items-center justify-content-center rounded-circle transition"><i class="ri-facebook-fill"></i></a></li>
@@ -70,7 +71,7 @@
                 <div class="doctor-desc">
                     <div class="single-para">
                         <h1>Introduction</h1>
-                        <p>Dr. Demetrius Wright is a private individual or a professional who gained prominence in a specific field after January 2025 I recommend checkingrecent and credible online sources such as professional profiles healthcare directories the official website of the relevant institution or clinic where this person works. Social media platforms or professional networking sites may also provide up-to-date information.</p>
+                        <p>@Model.Introduction</p>
                         <p>Your health and well-being are our top priorities. We take the time to listen to your concerns, answer your questions, and involve you in the decision-making process for your healthcare. We believe in empowering our patients to make informed choices about their health.</p>
                     </div>
                     <div class="single-para">
@@ -78,30 +79,31 @@
                         <p>Our clinic is equipped with modern facilities and advanced medical technology to ensure accurate diagnoses and effective treatments This enables us to provide you with the highest standard of care</p>
                     </div>
                     <ul class="features-list style-one list-unstyled pe-xxl-5 me-xxl-5 mb-35">
-                        <li class="position-relative"><i class="ri-checkbox-circle-line"></i><span class="fw-semibold text-title me-3">Cardiology</span>D.N.Sc.</li>
-                        <li class="position-relative"><i class="ri-checkbox-circle-line"></i><span class="fw-semibold text-title me-3">Dermatology</span> M.B.B.S,Ph.D</li>
-                        <li class="position-relative"><i class="ri-checkbox-circle-line"></i><span class="fw-semibold text-title me-3">Family Medicine</span>D.N.Sc. - M.B.B.S,Ph.D</li>
-                        <li class="position-relative"><i class="ri-checkbox-circle-line"></i><span class="fw-semibold text-title me-3">Obstetrics & Gynecology</span>Ph.D</li>
-                        <li class="position-relative"><i class="ri-checkbox-circle-line"></i><span class="fw-semibold text-title me-3">Oncology</span> M.B.B.S,Ph.D</li>
-                        <li class="position-relative"><i class="ri-checkbox-circle-line"></i><span class="fw-semibold text-title me-3">Orthopedic Surgery</span>M.B.B.S,Ph.D</li>
+                        @foreach(var speciality in Model.Specialities) 
+                        {
+                        <li class="position-relative"><i class="ri-checkbox-circle-line"></i><span class="fw-semibold text-title me-3">@speciality.Title</span>@speciality.Degree</li> 
+                         }
                     </ul>
                     <div class="single-para">
                         <h2>Educational Info</h2>
                         <p>We understand that every patient is unique, and their healthcare needs may vary. That's why we create individualized treatment plans tailored to your specific condition, lifestyle, and preferences.</p>
                     </div>
                     <ul class="features-list list-unstyled mb-35">
-                        <li class="position-relative"><i class="ri-checkbox-circle-line"></i><span class="fw-semibold text-title me-3">Medical College Of California</span>(Doctor of Medicine 2005)</li>
-                        <li class="position-relative"><i class="ri-checkbox-circle-line"></i><span class="fw-semibold text-title me-3">Center Of Medicine Anthology</span>(Medicine Doctorate Aid 2010)</li>
-                        <li class="position-relative"><i class="ri-checkbox-circle-line"></i><span class="fw-semibold text-title me-3">Cambridge School Of Medicine</span>(MBBS Ph.D. 2014)</li>
+                        @foreach(var education in Model.Educations)
+                        {
+                        <li class="position-relative"><i class="ri-checkbox-circle-line"></i><span class="fw-semibold text-title me-3">@education.University</span>(@education.Specialization @(education.Year.ToString("yyyy")))</li>
+                        }
                     </ul>
                     <div class="single-para">
                         <h2>Memberships</h2>
                         <p>We understand that every patient is unique, and their healthcare needs may vary. That's why we create individualized treatment plans tailored to your specific condition, lifestyle, and preferences.</p>
                     </div>
                     <ul class="features-list list-unstyled mb-50">
-                        <li class="position-relative"><i class="ri-checkbox-circle-line"></i>European Society Of Cardiology</li>
-                        <li class="position-relative"><i class="ri-checkbox-circle-line"></i>British Cardiovascular Society</li>
-                        <li class="position-relative"><i class="ri-checkbox-circle-line"></i>Fellow Royal Society Of Medicine</li>
+                        @foreach(var membership in Model.Memberships)
+                        {
+                         <li class="position-relative"><i class="ri-checkbox-circle-line"></i>@membership.Description</li>
+                        }
+                       
                     </ul>
                 </div>
                 <div class="filter-box round-20">
