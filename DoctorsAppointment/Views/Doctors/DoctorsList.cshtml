@@ -1,38 +1,104 @@
 ﻿@model IEnumerable<Doctor>
 
 <body>
+    <!-- Breadcrumb Section Start -->
+    <div class="breadcrumb-area bg-ash">
+        <div class="breadcrumb-wrap bg-f bg-3 position-relative z-1 round-20">
+            <img src="~/img/breadcrumb/br-shape-1.png" alt="Shape" class="br-shape-one position-absolute z-1 bounce">
+            <img src="~/img/breadcrumb/br-shape-2.png" alt="Shape" class="br-shape-two position-absolute z-1 rotate">
+            <div class="container">
+                <h2 class="section-title fw-bold text-white text-center mb-13">Doctors List</h2>
+                <ul class="br-menu text-center list-unstyled mb-0">
+                    <li class="position-relative fs-xx-14 d-inline-block"><a href="/Home/Index">Home</a></li>
+                    <li class="position-relative fs-xx-14 d-inline-block">Doctors List</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb Section End -->
+
     <!-- Doctor Search Section Start -->
     <div class="container style-one pt-120 pb-90">
-        <div class="text-center">
-            <h6 class="section-subtitle fw-medium font-primary d-inline-block text_secondary position-relative mb-15" data-aos="fade-up" data-aos-duration="1100" data-aos-delay="200">OUR DOCTORS</h6>
+        <div class="text-center"> 
+            <h6 class="section-subtitle fw-medium font-primary d-inline-block text_secondary position-relative mb-15" data-aos="fade-up" data-aos-duration="1100" data-aos-delay="200">OUR DOCTORS</h6> 
             <h2 class="section-title fw-black text-title text-center mb-35" data-aos="fade-up" data-aos-duration="1100" data-aos-delay="300">Meet The specialist Team</h2>
         </div>
-        <ul class="nav nav-tabs doctor-tablist d-flex justify-content-center border-0 mb-35" role="tablist">
-            <li class="nav-item">
-                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab_1" type="button" role="tab">All</button>
-            </li>
-            <li class="nav-item">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab_2" type="button" role="tab">Neurosurgery</button>
-            </li>
-            <li class="nav-item">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab_3" type="button" role="tab">Dentristy</button>
-            </li>
-            <li class="nav-item">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab_4" type="button" role="tab">Pediatrics</button>
-            </li>
-            <li class="nav-item">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab_5" type="button" role="tab">Cheif Surgeon</button>
-            </li>
-            <li class="nav-item">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab_6" type="button" role="tab">Cardiologist</button>
-            </li>
-            <li class="nav-item">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab_7" type="button" role="tab">Dermatologist</button>
-            </li>
-            <li class="nav-item">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab_8" type="button" role="tab">Neurologist</button>
-            </li>
-        </ul>
+        <!-- Doctor Search Section Start -->
+        <div class="container style-one pt-10 pb-10">
+            <div class="filter-box style-one round-20">
+                @* <form action="/Doctors/DoctorsList" class="form-wrapper" method="post"> *@
+
+                <form method="get" action="/Doctors/DoctorsList" class="form-wrapper">
+                    <div class="row">
+                        <div class="col-xl-3 col-md-6">
+                            <div class="form-group mb-25">
+                                <label for="name" class="text-title fw-medium fs-xx-14 d-block mb-13">Name</label>
+                                <input type="text" placeholder="Type A Name" value="@ViewBag.DoctorName" class="fs-xx-14 w-100 ht-56 round-10 bg-ash text-para border-0" name="doctor_name" id="name">
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="form-group mb-25">
+                                <label for="specialization_name" class="text-title fs-xx-14 fw-medium d-block mb-13">Specialization</label>
+                                <select name="specialization_id" id="specialization_name" class="fs-xx-14 w-100 ht-56 round-10 bg-ash text-para border-0">
+                                    <option value="0">Select Specialization</option>
+                                    @if (ViewData["specialities"] is List<Speciality> specialities)
+                                        foreach (var item in specialities)
+                                        {
+                                            if (item.Id == ViewBag.SpecializationId)
+                                            {
+                                                <option value="@item.Id" selected>@item.Title</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@item.Id">@item.Title</option>
+                                            }
+
+                                        }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="form-group mb-25">
+                                <label for="gender_name" class="text-title fs-xx-14 fw-medium d-block mb-13">Gender</label>
+                                <select name="gender_name" id="gender_name"  class="fs-xx-14 w-100 ht-56 round-10 bg-ash text-para border-0">
+                                    <option value="">Select Gender</option>
+                                    <option value="Male" selected="@(ViewBag.Gender == "Male")">Male</option>
+                                    <option value="Female" selected="@(ViewBag.Gender == "Female")">Female</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="form-group mb-25">
+                                <label for="location" class="text-title  fs-xx-14 fw-medium d-block mb-13">Location</label>
+                                <input type="text" placeholder="Type City Name" class="fs-xx-14 w-100 ht-56 round-10 bg-ash text-para border-0" name="location" id="location" value="@ViewBag.location">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-end">
+                        <div class="col-lg-9">
+                            <ul class="search-tag list-unstyled mb-0">
+                          
+                            </ul>
+                        </div>
+                        <div class="col-lg-3 text-lg-end">
+                            <button type="submit" class="btn style-two d-inline-block font-secondary fw-bold position-relative z-1 round-10 mt-2">
+                                <span>
+                                    Search Now
+                                    <img src="~/img/icons/right-arrow-white.svg" alt="Icon" class="transition icon-left">
+                                </span>
+                                <img src="~/img/icons/right-arrow-white.svg" alt="Icon" class="transition icon-right">
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row justify-content-center pt-120">
+                
+            </div>
+        </div>
+        <!-- Doctor Search Section End -->
+
+
         <div class="tab-content">
             <div class="tab-pane fade show active transition" id="tab_1" role="tabpanel">
                 <div class="row justify-content-center">
@@ -60,6 +126,7 @@
                 </div>
             </div>
         </div>
+    </div>
     <!-- Doctor Search Section End -->
 
     <!-- Simple Section Start -->
