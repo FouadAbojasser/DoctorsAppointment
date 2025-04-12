@@ -1,8 +1,11 @@
 ﻿@model IEnumerable<Appointment>
 
 @{
+
     int currentPage = ViewBag.Page ?? 1;
     int totalPages = ViewBag.TotalPages ?? 1;
+
+    List<int> OptionsRecordsPerPage = [5, 10,15,20];
 }
 
 <!-- Dashboard Start -->
@@ -18,10 +21,17 @@
                         <div class="fs-13 text-para d-flex align-items-center mb-10">
                             <span>Displays</span>
                             <select id="recordsPerPage" class="form-control fs-13 select_box bg-transparent text-para mx-md-3 mx-2 outline-0">
-                                <option value="5">5</option>
-                                <option value="10">10</option>
-                                <option value="15">15</option>
-                                <option value="20">20</option>
+                                @foreach (var option in OptionsRecordsPerPage)
+                                {
+                                    @if (ViewBag.RecordsPerPage == option)
+                                    {
+                                        <option value="@option" selected>@option</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@option">@option</option>
+                                    }
+                                }
                             </select>
                             <span>Records Per Page</span>
                         </div>
