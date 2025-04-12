@@ -19,6 +19,7 @@ This files table contents are outlined below>>>>>
 7.  Breadcrumb CSS
 8.  Hero CSS
 ----------------------------------*/
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" >
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&&display=swap');
 :root {
     --primaryFont: "Inter", serif;
@@ -5697,5 +5698,9 @@ body {
         padding: 40px 0 40px;
         border-radius: 0 0 20px 20px;
     }
+
+
+
+
 }
 

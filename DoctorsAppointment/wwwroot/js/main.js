@@ -662,4 +662,5 @@ try {
         }
     })();
 
-} catch (err) {}
+
+} catch (err) { }

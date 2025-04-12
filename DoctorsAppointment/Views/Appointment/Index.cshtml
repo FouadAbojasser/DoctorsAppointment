@@ -1,0 +1,154 @@
+﻿@model IEnumerable<Appointment>
+
+@{
+    int currentPage = ViewBag.Page ?? 1;
+    int totalPages = ViewBag.TotalPages ?? 1;
+}
+
+<!-- Dashboard Start -->
+<div class="db-wrapper bg-ash overflow-hidden">
+    <div class="transition" style="margin-left: 100px; margin-right: 100px">
+        <div class="db-content-wrapper">
+            <div class="db-content-box bg-white round-10 mb-25 pb-3">
+                <div class="db-content-box-header d-flex flex-wrap align-items-center justify-content-between mb-30">
+                    <h4 class="fs-17 fw-bold text-title fw-extrabold mb-sm-10 mb-md-0 w-75">Appointments List</h4>
+                </div>
+                <div class="row mb-20">
+                    <div class="col-md-6">
+                        <div class="fs-13 text-para d-flex align-items-center mb-10">
+                            <span>Displays</span>
+                            <select id="recordsPerPage" class="form-control fs-13 select_box bg-transparent text-para mx-md-3 mx-2 outline-0">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                            </select>
+                            <span>Records Per Page</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="db-table table-responsive">
+                    <table class="table text-nowrap align-middle mb-30">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-title bg-ash fw-semibold fs-13">
+                                    #
+                                </th>
+                                <th scope="col" class="text-title bg-ash fw-bold fs-13">
+                                    Patient Name
+                                </th>
+                                <th scope="col" class="text-title fw-bold fs-13">
+                                    Date of Birth
+                                </th>
+                                <th scope="col" class="text-title fw-bold fs-13">
+                                    Age
+                                </th>
+                                <th scope="col" class="text-title fw-bold fs-13">
+                                    Consulting Doctor
+                                </th>
+                                <th scope="col" class="text-title fw-bold fs-13">
+                                    Department
+                                </th>
+                                <th scope="col" class="text-title fw-bold fs-13">
+                                    Date
+                                </th>
+                                <th scope="col" class="text-title fw-bold fs-13">
+                                    Time
+                                </th>
+                                <th scope="col" class="text-title fw-bold fs-13 text-end">
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int counter = ((ViewBag.Page - 1) * (ViewBag.RecordsPerPage))+1;
+                            }
+                            @foreach(var appointment in Model)
+                            {
+                                <tr>
+                                    <td class="fs-13 lh-1 text-para">@counter</td>
+                                    <td>
+                                        <span class="fs-13 lh-1 text-para">@appointment.PatientName</span>
+                                    </td>
+                                    <td>
+                                        <span class="fs-13 lh-1 text-para">@appointment.PatientDofB</span>
+                                    </td>
+                                    <td>
+                                        <span class="fs-13 lh-1 text-para">@appointment.Age</span>
+                                    </td>
+                                    <td>
+                                        <div class="db-doc_card d-flex align-items-center product-item">
+                                            <div class="doc-img rounded-circle"><img src="~/img/doctors/@appointment.Doctor.Img" alt="Doctor" class="rounded-circle"></div>
+                                            <a href="Doctors/DoctorDetails/@appointment.DoctorId" class="fs-13 lh-1 text-para hover-text-primary">@appointment.Doctor.Name</a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="fs-13 lh-1 text-para">@appointment.Doctor.DoctorType</span>
+                                    </td>
+                                    <td>
+                                        <span class="fs-13 lh-1 text-para">@appointment.AppoDate</span>
+                                    </td>
+                                    <td>
+                                        <span class="fs-13 lh-1 text-para">@appointment.AppoTime</span>
+                                    </td>
+                                    <td>
+                                        <div class="button-group d-flex flex-wrap align-items-center justify-content-end">
+                                            <button class="border-0 bg-transparent p-0 delete-btn">
+                                                <img src="~/img/dashboard/icons/delete.svg" alt="Icon">
+                                            </button>
+                                            <a href="#">
+                                                <img src="~/img/dashboard/icons/edit.svg" alt="Icon">
+                                            </a>
+                                            <a href="#">
+                                                <img src="~/img/dashboard/icons/view.svg" alt="Image">
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                counter++;
+                                ;
+                            }
+                        </tbody>
+                    </table>
+
+                    <ul class="db-pagination pagination ms-auto justify-content-end mb-0 pb-3">
+
+                        <!-- Previous Button -->
+                        <li class="page-item @(currentPage == 1 ? "disabled" : "")">
+                            <a class="page-link" href="/Appointment/Index?Page=@(currentPage - 1)&RecordsPerPage=@ViewBag.RecordsPerPage" aria-label="Previous">
+                                <i class="ri-arrow-left-s-line"></i>
+                            </a>
+                        </li>
+
+                        <!-- Page Numbers -->
+                        @for (int x = 1; x <= totalPages; x++)
+                        {
+                            <li class="page-item @(x == currentPage ? "active" : "")">
+                                <a class="page-link" href="/Appointment/Index?Page=@x&RecordsPerPage=@ViewBag.RecordsPerPage">@x</a>
+                            </li>
+                        }
+
+                        <!-- Next Button -->
+                        <li class="page-item @(currentPage == totalPages ? "disabled" : "")">
+                            <a class="page-link" href="/Appointment/Index?Page=@(currentPage + 1)&RecordsPerPage=@ViewBag.RecordsPerPage" aria-label="Next">
+                                <i class="ri-arrow-right-s-line"></i>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Dashboard End -->
+<script>
+    document.getElementById('recordsPerPage').addEventListener('change', function () {
+        const selectedValue = this.value;
+        const baseUrl = "/Appointment/Index";
+        window.location.href = `${baseUrl}?RecordsPerPage=${selectedValue}`;
+    });
+</script>
+

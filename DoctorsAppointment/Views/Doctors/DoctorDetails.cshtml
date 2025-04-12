@@ -81,8 +81,8 @@
                     <ul class="features-list style-one list-unstyled pe-xxl-5 me-xxl-5 mb-35">
                         @foreach(var speciality in Model.Specialities) 
                         {
-                        <li class="position-relative"><i class="ri-checkbox-circle-line"></i><span class="fw-semibold text-title me-3">@speciality.Title</span>@speciality.Degree</li> 
-                         }
+                            <li class="position-relative"><i class="ri-checkbox-circle-line"></i><span class="fw-semibold text-title me-3">@speciality.Title</span>@speciality.Degree</li> 
+                        }
                     </ul>
                     <div class="single-para">
                         <h2>Educational Info</h2>
@@ -91,7 +91,7 @@
                     <ul class="features-list list-unstyled mb-35">
                         @foreach(var education in Model.Educations)
                         {
-                        <li class="position-relative"><i class="ri-checkbox-circle-line"></i><span class="fw-semibold text-title me-3">@education.University</span>(@education.Specialization @(education.Year.ToString("yyyy")))</li>
+                            <li class="position-relative"><i class="ri-checkbox-circle-line"></i><span class="fw-semibold text-title me-3">@education.University</span>(@education.Specialization @(education.Year.ToString("yyyy")))</li>
                         }
                     </ul>
                     <div class="single-para">
@@ -101,39 +101,100 @@
                     <ul class="features-list list-unstyled mb-50">
                         @foreach(var membership in Model.Memberships)
                         {
-                         <li class="position-relative"><i class="ri-checkbox-circle-line"></i>@membership.Description</li>
+                            <li class="position-relative"><i class="ri-checkbox-circle-line"></i>@membership.Description</li>
                         }
-                       
+
                     </ul>
                 </div>
                 <div class="filter-box round-20">
                     <h2 class="fs-36 fw-extrabold text-title mb-20">Book An Appointment</h2>
-                    <form action="#" class="form-wrapper">
+                    <form id="appointmentForm" method="post" class="form-wrapper" action="/Appointment/AddAppointment">
+                        <input type="hidden" readonly name="DoctorId" value="@Model.Id" class="form-group" />
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group position-relative mb-30">
-                                    <input type="text" required class="fs-xx-14 w-100 h-54 round-10 bg-ash text-para border-0" placeholder="Your Name">
+                                    <span>Your Name</span>
+                                    <input type="text" required class="mb-30 fs-xx-14 w-100 h-54 round-10 bg-ash text-para border-0" name="PatientName">
                                     <img src="~/img/icons/person-gray.svg" alt="Icon">
                                 </div>
                             </div>
+
                             <div class="col-md-6">
                                 <div class="form-group position-relative mb-30">
-                                    <input type="email" placeholder="Email Address" required class="fs-xx-14 w-100 h-54 round-10 bg-ash text-para border-0">
+                                    <span>Your Date of Birth</span>
+                                    <input type="text"
+                                    required
+                                    readonly
+                                    class="mb-30 dob-picker fs-xx-14 w-100 h-54 round-10 bg-ash text-para border-0"
+                                    name="PatientDofB">
+                                    <img src="~/img/icons/calendar.svg" alt="Icon">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group position-relative mb-30">
+                                    <span> Your Email Address </span>
+                                    <input type="email" required class="mb-30 fs-xx-14 w-100 h-54 round-10 bg-ash text-para border-0" name="PatientEmail">
                                     <img src="~/img/icons/mail-gray.svg" alt="Icon">
                                 </div>
                             </div>
+
                             <div class="col-md-6">
                                 <div class="form-group position-relative mb-30">
-                                    <input type="number" placeholder="Phone Number" required class="fs-xx-14 w-100 h-54 round-10 bg-ash text-para border-0">
-                                    <img src="~/img/icons/phone-gray.svg" alt="Icon">
+                                    <span> Your Phone Number </span>
+                                    <input type="number" required class="mb-30 fs-xx-14 w-100 h-54 round-10 bg-ash text-para border-0 pl-40" name="PatientPhone">
+                                    <img src="~/img/icons/phone-gray.svg"  alt="Icon" >
                                 </div>
                             </div>
+
                             <div class="col-md-6">
                                 <div class="form-group position-relative mb-30">
-                                    <input type="date" required class="fs-xx-14 w-100 h-54 round-10 bg-ash text-para border-0">
+                                    <span>Appointment Date</span>
+                                    <input type="text"
+                                    required
+                                    readonly
+                                    class="mb-30 date-picker fs-xx-14 w-100 h-54 round-10 bg-ash text-para border-0"
+                                    name="AppoDate"
+                                    id="futureDate"/>
+                                    <img src="~/img/icons/calendar.svg" alt="Icon">
                                 </div>
                             </div>
+
+
+                            <div class="col-md-6">
+                                <div class="form-group position-relative mb-30">
+                                    <span> Appointment Time </span>
+                                    <select id="timePicker"
+                                    class="fs-xx-14 w-100 h-54 round-10 bg-ash text-para border-0" style="height:53px"
+                                    name="AppoTime"
+                                    required>
+                                        <option value="" disabled selected></option>
+                                    </select>
+                                </div>
+                            </div>
+
                         </div>
+
+                        <!--Sweet Alerts-->
+                        <template id="appointment-error-template">
+                            <swal-title>Date & Time Unavailable</swal-title>
+                            <swal-html>
+                                This date and time are already reserved.<br>Please choose a different appointment slot.
+                            </swal-html>
+                            <swal-icon type="error"></swal-icon>
+                        </template>
+
+                        <template id="appointment-success-template">
+                            <swal-title>Appointment Booked</swal-title>
+                            <swal-html>
+                                Your appointment has been successfully booked!
+                            </swal-html>
+                            <swal-icon type="success"></swal-icon>
+                        </template>
+
+
+
+
                         <button type="submit" class="btn style-two font-secondary fw-medium d-block w-100 position-relative z-1 round-6 d-block w-100">
                             <span>
                                 Make An Appointment
@@ -287,3 +348,41 @@
     </div>
 </div>
 <!-- Doctor Section End -->
+
+
+
+<script>
+    const reservedAppointments = [
+    @foreach (var appointment in Model.Appointments)
+    {
+        <text>"@appointment.AppoDate.ToString("yyyy-MM-dd") @TimeOnly.Parse(appointment.AppoTime.ToString()).ToString("HH:mm")",</text>
+    }
+    ];
+
+    document.getElementById("appointmentForm").addEventListener("submit", function (e) {
+        e.preventDefault(); // Always prevent initially
+
+        const date = document.getElementById("futureDate").value;
+        const time = document.getElementById("timePicker").value;
+        const selectedDateTime = `${date} ${time}`;
+
+        if (reservedAppointments.includes(selectedDateTime)) {
+            Swal.fire({
+                template: '#appointment-error-template'
+            });
+        } else {
+            Swal.fire({
+                template: '#appointment-success-template',
+                showConfirmButton: true,
+                confirmButtonText: 'OK',
+            }).then(() => {
+                // Submit the form manually after confirmation
+                document.getElementById("appointmentForm").submit();
+            });
+        }
+    });
+</script>
+
+
+
+

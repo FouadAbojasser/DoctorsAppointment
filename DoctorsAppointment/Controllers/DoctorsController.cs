@@ -6,16 +6,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DoctorsAppointment.Controllers
 {
-    
     public class DoctorsController : Controller
     {
-        private readonly ApplicationDbContext _context = new();
+        private readonly ApplicationDbContext _context = new ();
         public IActionResult DoctorsList(string doctor_name, int specialization_id, string gender_name, string location)
         {
            
             IQueryable<Doctor> doctors = _context.Doctors.Include(d => d.Specialities);
 
-           
             var distinctSpecialities = _context.Specialities.Distinct().OrderBy(e=>e.Title);
             ViewData["specialities"] = distinctSpecialities.ToList();
 
@@ -54,6 +52,7 @@ namespace DoctorsAppointment.Controllers
                 .Include(m => m.Memberships)
                 .Include(e => e.Educations )
                 .Include(s => s.Specialities)
+                .Include(p=>p.Appointments)
                 .FirstOrDefault(d => d.Id == id);
             if (doctor != null)
             {
@@ -62,8 +61,9 @@ namespace DoctorsAppointment.Controllers
             else
             {
                 return View("NotFoundPage");
-            }
-                
+            }      
         }
+
+
     }
 }

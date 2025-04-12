@@ -4,6 +4,7 @@ using DoctorsAppointment.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DoctorsAppointment.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250411120654_AddDoctorNaviPropToAppointment")]
+    partial class AddDoctorNaviPropToAppointment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -305,13 +308,13 @@ namespace DoctorsAppointment.Migrations
 
             modelBuilder.Entity("DoctorsAppointment.Models.Appointment", b =>
                 {
-                    b.HasOne("DoctorsAppointment.Models.Doctor", "Doctors")
+                    b.HasOne("DoctorsAppointment.Models.Doctor", "Doctor")
                         .WithMany("Appointments")
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Doctors");
+                    b.Navigation("Doctor");
                 });
 
             modelBuilder.Entity("DoctorsAppointment.Models.Doctor", b =>

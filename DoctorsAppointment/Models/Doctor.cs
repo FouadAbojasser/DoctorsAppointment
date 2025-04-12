@@ -19,5 +19,6 @@ namespace DoctorsAppointment.Models
         public List<Membership> Memberships { get; } = [];
         public List<Education> Educations { get; } = [];
         public List<Speciality> Specialities { get; } = [];
+        public List<Appointment> Appointments { get; } = [];
     }
 }

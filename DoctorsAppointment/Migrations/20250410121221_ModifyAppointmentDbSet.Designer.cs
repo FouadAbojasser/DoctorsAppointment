@@ -4,6 +4,7 @@ using DoctorsAppointment.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DoctorsAppointment.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250410121221_ModifyAppointmentDbSet")]
+    partial class ModifyAppointmentDbSet
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -84,9 +87,6 @@ namespace DoctorsAppointment.Migrations
                     b.Property<TimeOnly>("AppoTime")
                         .HasColumnType("time");
 
-                    b.Property<int>("DoctorId")
-                        .HasColumnType("int");
-
                     b.Property<DateOnly>("PatientDofB")
                         .HasColumnType("date");
 
@@ -103,8 +103,6 @@ namespace DoctorsAppointment.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DoctorId");
 
                     b.ToTable("Appointments");
                 });
@@ -301,22 +299,6 @@ namespace DoctorsAppointment.Migrations
                         .HasForeignKey("SpecialitiesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("DoctorsAppointment.Models.Appointment", b =>
-                {
-                    b.HasOne("DoctorsAppointment.Models.Doctor", "Doctors")
-                        .WithMany("Appointments")
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Doctors");
-                });
-
-            modelBuilder.Entity("DoctorsAppointment.Models.Doctor", b =>
-                {
-                    b.Navigation("Appointments");
                 });
 #pragma warning restore 612, 618
         }
