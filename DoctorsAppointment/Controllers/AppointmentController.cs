@@ -19,7 +19,7 @@ namespace DoctorsAppointment.Controllers
             ViewBag.RecordsPerPage = RecordsPerPage;
             ViewBag.TotalPages = (int)(Math.Ceiling((double)_dBcontext.Appointments.Count() / RecordsPerPage)) ;
 
-            return View(appointments);
+            return View(appointments.ToList());
         }
 
       

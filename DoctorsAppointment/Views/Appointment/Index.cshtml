@@ -5,7 +5,7 @@
     int currentPage = ViewBag.Page ?? 1;
     int totalPages = ViewBag.TotalPages ?? 1;
 
-    List<int> OptionsRecordsPerPage = [5, 10,15,20];
+    List<int> OptionsRecordsPerPage = [5,10,15,20];
 }
 
 <!-- Dashboard Start -->
@@ -90,7 +90,7 @@
                                     <td>
                                         <div class="db-doc_card d-flex align-items-center product-item">
                                             <div class="doc-img rounded-circle"><img src="~/img/doctors/@appointment.Doctor.Img" alt="Doctor" class="rounded-circle"></div>
-                                            <a href="Doctors/DoctorDetails/@appointment.DoctorId" class="fs-13 lh-1 text-para hover-text-primary">@appointment.Doctor.Name</a>
+                                            <a href="/Doctors/DoctorDetails/@appointment.DoctorId" class="fs-13 lh-1 text-para hover-text-primary">@appointment.Doctor.Name</a>
                                         </div>
                                     </td>
                                     <td>
